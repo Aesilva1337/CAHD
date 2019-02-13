@@ -1,0 +1,25 @@
+
+# compiled output
+/dist
+/tmp
+bin/
+obj/
+
+# Node modules
+node_modules/
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+.vs/
+*.launch
+.settings/
+*.sublime-workspace
+*.user
+*.coverage
+
+# System Files
+.DS_Store
+Thumbs.db
