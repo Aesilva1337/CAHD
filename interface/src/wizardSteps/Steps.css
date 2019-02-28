@@ -1,0 +1,15 @@
+.Arrow-left {
+    float: left;
+    padding-left: 5%; 
+  }
+  
+  .Arrow-right {
+    float: right;
+    padding-right: 5%;
+  }
+  
+  .Wizard-content {
+    display: inline-block;
+    justify-content: center;
+  }
+  

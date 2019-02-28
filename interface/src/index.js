@@ -3,9 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import StepWizard from 'react-step-wizard';
-import StepOne from './wizardSteps/StepOne';
-import StepTwo from './wizardSteps/StepTwo';
+import 'bootstrap/dist/css/bootstrap.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
