@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 class StepOne extends Component {
   render() {
@@ -6,11 +7,11 @@ class StepOne extends Component {
       <div>
         <h1>Isso é um teste para criação da wizard</h1>
         <h3>StepOne</h3>
-        <p>
-          <button onClick={this.props.previousStep}>Previous Step</button>
+        <p> 
+        <a onClick={this.props.previousStep}><FontAwesomeIcon icon="arrow-left" size="5x"/></a>
         </p>
         <p>
-          <button onClick={this.props.nextStep}>Next Step</button>
+          <a onClick={this.props.nextStep}><FontAwesomeIcon icon="arrow-right" size="5x"/></a>
         </p>
       </div>
     );
