@@ -37,9 +37,9 @@ manchester_ctrl = ctrl.ControlSystem([rule1, rule2, rule3])
 
 classificar = ctrl.ControlSystemSimulation(manchester_ctrl)
 
-classificar.input['Dados Vitais Alterados'] = 5
-classificar.input['Dor'] = 5
-classificar.input['Nuca'] = 9
+classificar.input['Dados Vitais Alterados'] = 2
+classificar.input['Dor'] = 9
+classificar.input['Nuca'] = 5
 
 classificar.compute()
 

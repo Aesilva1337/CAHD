@@ -1,0 +1,15 @@
+<div style="border: 1px solid; border-color: #084d6e">
+        <h1 class="text-center">Classificação de Risco</h1>
+    <div class="row d-flex justify-content-center">
+    <div class="col-md-4" *ngFor="let diag of listDiagnostico"> 
+        <div class="card">
+            <div class="card-header"style="background-color: teal">
+                {{diag.titulo}}
+            </div>
+            <div class="card-body">
+                {{diag.descricao}}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
