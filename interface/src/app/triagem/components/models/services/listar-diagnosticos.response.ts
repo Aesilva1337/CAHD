@@ -6,5 +6,4 @@ export class ListarDiagnosticoResponse extends BaseResponse<ListarDiagnosticoMod
 export class ListarDiagnosticoModel{
     public idDiagnostico: number;
     public tituloDiagnostico: string;
-    public descDiagnostico: string;
 }

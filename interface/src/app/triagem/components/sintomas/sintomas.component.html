@@ -1,0 +1,6 @@
+<form [formGroup]="form">
+    <label formArrayName="sintomas" *ngFor="let sintoma of form.controls.sintomas.controls; let i = index">
+            <input type="checkbox" [formControlName]="i">
+            {{sintomas[i].descricao}}
+    </label>
+</form>  

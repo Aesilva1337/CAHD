@@ -14,6 +14,10 @@ const routes: Routes = [
         loadChildren: './triagem/triagem.module#TriagemModule'
       }
     ]
+  },{
+    path: '',
+    redirectTo: '/home/triagem',
+    pathMatch: 'full'
   }
 ];
 

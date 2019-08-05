@@ -19,8 +19,7 @@ import { DiagnosticoModel } from '../models/components/diagnostico.model';
       const response = await this.triagemService.ListarDiagnostico();
       response.data.forEach(diag => this.listDiagnostico.push({
         id: diag.idDiagnostico,
-        titulo: diag.tituloDiagnostico,
-        descricao: diag.descDiagnostico
+        titulo: diag.tituloDiagnostico
       }));
     }
 
