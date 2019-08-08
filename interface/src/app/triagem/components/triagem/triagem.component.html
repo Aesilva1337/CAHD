@@ -1,10 +1,9 @@
-<div style="border: 1px solid; border-color: #084d6e">
-        <h1 class="text-center">Classificação de Risco</h1>
+<div style="border: 1px solid; border-color: #084d6e; border-radius: 10px; background-color: whitesmoke">
     <div class="row d-flex justify-content-center">
-    <div class="col-md-4" *ngFor="let diag of listDiagnostico"> 
+    <div class="col-md-4" *ngFor="let diag of listDiagnostico" style="padding: 5px"> 
         <a routerLink="{{diag.id}}/sintomas">
             <div class="card">
-                <div class="card-header"style="background-color: teal">
+                <div class="card-header text-center" style="background-color: #013243; color: white;">
                     {{diag.titulo}}
                 </div>
             </div>

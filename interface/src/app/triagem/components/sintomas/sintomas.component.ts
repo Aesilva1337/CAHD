@@ -30,19 +30,13 @@ import { ActivatedRoute } from '@angular/router';
       const response = await this.triagemService.ListarSintomas({idDiagnostico: this.idDiagnostico});
       response.data.forEach(sintoma => this.listSintomas.push({
         id: sintoma.idSintoma,
-        descricao: sintoma.descricaoSintoma
+        descricao: sintoma.descricaoSintoma,
+        checked: false
       }));
-      debugger;
-      this.addCheckboxes();
     }
 
-    private addCheckboxes() {
-      this.listSintomas.map((o, i) => {
-        const control = new FormControl(i === 0);
-        debugger;
-        (this.form.controls.sintomas as FormArray).push(control);
-      });
-      console.log(this.form.controls.sintomas)
+    checkboxSintoma(Sintoma: SintomasModel){
+      Sintoma.checked = !Sintoma.checked;
+      console.log(this.listSintomas)
     }
-
   }

@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { ListarSintomasRequest } from '../models/services/listar-sintomas.request';
 import { ListarDiagnosticosRequest } from '../models/services/listar-diagnosticos.request';
 import { ListarSintomasResponse, ListarSintomasModel } from '../models/services/listar-sintomas.response';
+import { EClassificacaoManchester } from '../models/enum/classificacao-manchester.enum';
+import { ObterInformacoesClassificacaoManchesterResponse } from '../models/services/obter-informacoes-classificacao-manchester.response';
 
 @Injectable({
     providedIn: 'root',
@@ -57,5 +59,44 @@ export class TriagemService {
 
         return response;
       }
-    
+
+      public async ObterInformacoesClassificacaoManchester(classificacaoManchester: EClassificacaoManchester): Promise<ObterInformacoesClassificacaoManchesterResponse>{
+        switch(classificacaoManchester){
+          case EClassificacaoManchester.Emergencia: {
+            return {success: true, errors: [], data: {
+              corManchester: 'Emergente',
+              descricaoManchester: 'Emergente',
+              tempoEspera: 0
+            }}
+          }
+          case EClassificacaoManchester.MuitaUrgencia: {
+            return {success: true, errors: [], data: {
+              corManchester: 'MuitoUrgente',
+              descricaoManchester: 'Muito Urgente',
+              tempoEspera: 10
+            }}
+          }
+          case EClassificacaoManchester.Urgente: {
+            return {success: true, errors: [], data: {
+              corManchester: 'Urgente',
+              descricaoManchester: 'Urgente',
+              tempoEspera: 60
+            }}
+          }
+          case EClassificacaoManchester.PoucoUrgente: {
+            return {success: true, errors: [], data: {
+              corManchester: 'PoucoUrgente',
+              descricaoManchester: 'Pouco Urgente',
+              tempoEspera: 120
+            }}
+          }
+          case EClassificacaoManchester.NaoUrgente: {
+            return {success: true, errors: [], data: {
+              corManchester: 'NaoUrgente',
+              descricaoManchester: 'Não Urgente',
+              tempoEspera: 240
+            }}
+          }
+        }
+      }    
 }
