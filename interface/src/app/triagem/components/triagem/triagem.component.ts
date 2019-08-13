@@ -14,8 +14,14 @@ import { DiagnosticoModel } from '../models/components/diagnostico.model';
     }
 
     public listDiagnostico: DiagnosticoModel[] = [];
+    public idDiagnostico: number;
+    public isDiag: boolean = true;
 
     async ngOnInit() {
+      this.populateDiagnostico();
+    }
+    
+    async populateDiagnostico(){      
       const response = await this.triagemService.ListarDiagnostico();
       response.data.forEach(diag => this.listDiagnostico.push({
         id: diag.idDiagnostico,
@@ -23,4 +29,16 @@ import { DiagnosticoModel } from '../models/components/diagnostico.model';
       }));
     }
 
+    async renderDiagnosticos(){
+      this.isDiag = true;
+    }
+
+    async renderSintomas(idDiagnostico: number){
+      this.isDiag = false;
+      this.idDiagnostico = idDiagnostico;
+    }
+
+    async atualizaManchester(){
+      //TODO: REALIZAR CHAMADA API FUZZY
+    }
   }

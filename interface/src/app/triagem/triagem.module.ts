@@ -6,11 +6,13 @@ import { CommonModule } from '@angular/common';
 import { SintomasComponent } from './components/sintomas/sintomas.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClassificacaoManchesterComponent } from './components/classificacao-manchester/classificacao-manchester.components';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
     declarations: [
         TriagemComponent,
-        SintomasComponent
+        SintomasComponent,
+        ClassificacaoManchesterComponent
     ],
     entryComponents: [
         TriagemComponent
@@ -22,7 +24,8 @@ import { ClassificacaoManchesterComponent } from './components/classificacao-man
         TriagemRoutingModule,
         CommonModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        AngularFontAwesomeModule
     ],
   })
   export class TriagemModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TriagemService } from '../services/triagem.service';
 import { SintomasModel } from '../models/components/sintomas.model';
 import { FormBuilder, FormGroup, FormArray, FormControl, ValidatorFn } from '@angular/forms';
@@ -15,12 +15,19 @@ import { ActivatedRoute } from '@angular/router';
       private formBuilder: FormBuilder,
       private route: ActivatedRoute
     ) {
-      this.route.params.subscribe(res => this.idDiagnostico = res.idDiagnostico);
     }
 
     public listSintomas: SintomasModel[] = [];
     public form: FormGroup;
-    public idDiagnostico: number;
+
+    @Input()
+    idDiagnostico: number;
+    
+    @Output()
+    isDiag: EventEmitter<boolean> = new EventEmitter(false);
+
+    @Output()
+    sintomas: EventEmitter<SintomasModel[]> = new EventEmitter(true);
 
     async ngOnInit() {
       this.form = this.formBuilder.group({
@@ -38,5 +45,13 @@ import { ActivatedRoute } from '@angular/router';
     checkboxSintoma(Sintoma: SintomasModel){
       Sintoma.checked = !Sintoma.checked;
       console.log(this.listSintomas)
+    }
+
+    atualizaEstadoVital(){
+      this.sintomas.emit(this.listSintomas);
+    }
+
+    renderDiagnostico(){
+      this.isDiag.emit(true);
     }
   }

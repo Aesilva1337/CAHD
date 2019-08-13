@@ -1,18 +1,15 @@
-<div style="border: 1px solid; border-color: #084d6e; border-radius: 10px; background-color: whitesmoke">
 <form [formGroup]="form">
-    <div class="form-check custom-control" *ngFor="let sintoma of listSintomas; let i = index" 
-    (click)="checkboxSintoma(sintoma)">
+    <div class="form-check custom-control" *ngFor="let sintoma of listSintomas; let i = index"
+        (click)="checkboxSintoma(sintoma)">
         <input type="checkbox" class="form-check-input" id="checkBoxSintoma{{sintoma.id}}" name="example{{sintoma.id}}">
         <label class="form-check-label" for="checkBoxSintoma{{sintoma.id}}">{{sintoma.descricao}}</label>
     </div>
-</form>  
+</form>
 <div class="text-center">
-    <a routerLink="">            
-        <div class="card">
-            <div class="card-header text-center" s style="background-color: #013243; color: white;">
-                Voltar
-            </div>
+    <div class="card">
+        <div class="card-header text-center" (click)="renderDiagnostico()" 
+        style="background-color: #013243; color: white; border-radius: 15px">
+            Voltar
         </div>
-    </a>
-</div>
+    </div>
 </div>
