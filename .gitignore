@@ -23,3 +23,28 @@ node_modules/
 # System Files
 .DS_Store
 Thumbs.db
+
+build/
+__pycache__/
+*.pytest_cache/
+local_settings.py
+*.py[cod]
+*.swp
+*.log
+.DS_Store
+.env
+.venv
+env/
+*.eggs
+*.egg-info
+venv/
+.vscode
+.idea
+.cache/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+notes.md
+celerybeat-schedule
+.coverage
