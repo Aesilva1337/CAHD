@@ -17,6 +17,15 @@ class Cefaleia(Resource):
         PAD = request.args.get('PAD')
         #endregion
 
+        #region .: Verificação de valores da API :.
+        if DadosVitaisAlterados is None or DadosVitaisAlterados == '': DadosVitaisAlterados = 0
+        if Dor is None or Dor == '': Dor = 0
+        if Nuca is None or Nuca == '': Nuca = 0
+        if SinaisNeurologicos is None or SinaisNeurologicos == '': SinaisNeurologicos = 0
+        if PAD is None or PAD == '': PAD = 0
+        if PAS is None or PAS == '': PAD = 0    
+        #endregion
+
         #region .: Definição do range de cada sintoma :.
         vl_DadosVitaisAlterados = np.arange(0, 101, 1)
         vl_Dor = np.arange(0, 101, 1) 
@@ -44,12 +53,12 @@ class Cefaleia(Resource):
         SinaisNeurologicos_normal = fuzz.trimf(vl_SinaisNeurologicos, [65, 80, 90])
         SinaisNeurologicos_alto = fuzz.trimf(vl_SinaisNeurologicos, [75, 95, 100])
 
-        PAS_baixo = fuzz.trimf(vl_PAS, [0, 50, 70])
-        PAS_normal = fuzz.trimf(vl_PAS, [65, 80, 90])
+        #PAS_baixo = fuzz.trimf(vl_PAS, [0, 50, 70])
+        #PAS_normal = fuzz.trimf(vl_PAS, [65, 80, 90])
         PAS_alto = fuzz.trimf(vl_PAS, [75, 95, 100])
 
-        PAD_baixo = fuzz.trimf(vl_PAD, [0, 50, 70])
-        PAD_normal = fuzz.trimf(vl_PAD, [65, 80, 90])
+        #PAD_baixo = fuzz.trimf(vl_PAD, [0, 50, 70])
+        #PAD_normal = fuzz.trimf(vl_PAD, [65, 80, 90])
         PAD_alto = fuzz.trimf(vl_PAD, [75, 95, 100])
 
         saida_verde = fuzz.trimf(x_saida, [0, 10, 20])
@@ -59,8 +68,8 @@ class Cefaleia(Resource):
 
         #region .: Função de ativação para cada nivel definido anteriormente :.
         DadosVitaisAlterados_level_baixo = fuzz.interp_membership(vl_DadosVitaisAlterados, DadosVitaisAlterados_baixo, DadosVitaisAlterados)
-        DadosVitaisAlterados_level_medio = fuzz.interp_membership(vl_DadosVitaisAlterados, DadosVitaisAlterados_normal, Dor)
-        DadosVitaisAlterados_level_alto = fuzz.interp_membership(vl_DadosVitaisAlterados, DadosVitaisAlterados_alto, Nuca)
+        DadosVitaisAlterados_level_medio = fuzz.interp_membership(vl_DadosVitaisAlterados, DadosVitaisAlterados_normal, DadosVitaisAlterados)
+        DadosVitaisAlterados_level_alto = fuzz.interp_membership(vl_DadosVitaisAlterados, DadosVitaisAlterados_alto, DadosVitaisAlterados)
 
         Dor_level_baixo = fuzz.interp_membership(vl_Dor, Dor_baixo, Dor)
         Dor_level_medio = fuzz.interp_membership(vl_Dor, Dor_normal, Dor)
@@ -74,13 +83,13 @@ class Cefaleia(Resource):
         SinaisNeurologicos_level_medio = fuzz.interp_membership(vl_SinaisNeurologicos, SinaisNeurologicos_normal, SinaisNeurologicos)
         SinaisNeurologicos_level_alto = fuzz.interp_membership(vl_SinaisNeurologicos, SinaisNeurologicos_alto, SinaisNeurologicos)
 
-        PAS_level_baixo = fuzz.interp_membership(vl_PAS, PAS_baixo, PAS)
-        PAS_level_medio = fuzz.interp_membership(vl_PAS, PAS_normal, PAS)
+        #PAS_level_baixo = fuzz.interp_membership(vl_PAS, PAS_baixo, PAS)
+        #PAS_level_medio = fuzz.interp_membership(vl_PAS, PAS_normal, PAS)
         PAS_level_alto = fuzz.interp_membership(vl_PAS, PAS_alto, PAS)
 
-        PAD_level_baixo = fuzz.interp_membership(vl_PAD, PAS_baixo, PAD)
-        PAD_level_medio = fuzz.interp_membership(vl_PAD, PAS_normal, PAD)
-        PAD_level_alto = fuzz.interp_membership(vl_PAD, PAS_alto, PAD)
+        #PAD_level_baixo = fuzz.interp_membership(vl_PAD, PAD_baixo, PAD)
+        #PAD_level_medio = fuzz.interp_membership(vl_PAD, PAD_normal, PAD)
+        PAD_level_alto = fuzz.interp_membership(vl_PAD, PAD_alto, PAD)
         #endregion
 
         try:
@@ -130,6 +139,6 @@ class Cefaleia(Resource):
 
             #endregion
 
-            return {'manchester': defuzz }
+            return { 'manchester': defuzz }
         except:
             return {'erro': 'Ocorreu um erro, por favor tente novamente!'}
