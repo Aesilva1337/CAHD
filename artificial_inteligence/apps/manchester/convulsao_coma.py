@@ -54,9 +54,10 @@ class ConsulsaoComa(Resource):
         Epilepsia_normal = fuzz.trimf(vl_Epilepsia, [35, 60, 85])
         Epilepsia_alto = fuzz.trimf(vl_Epilepsia, [80, 90, 100])
 
-        saida_verde = fuzz.trimf(x_saida, [0, 10, 20])
-        saida_amarelo = fuzz.trimf(x_saida, [20, 30, 40])
-        saida_vermelho = fuzz.trimf(x_saida, [40, 50, 60])
+        saida_azul = fuzz.trimf(x_saida, [0, 7, 15])
+        saida_verde = fuzz.trimf(x_saida, [15, 22, 29])
+        saida_amarelo = fuzz.trimf(x_saida, [29, 36, 43])
+        saida_vermelho = fuzz.trimf(x_saida, [43, 50, 60])
         #endregion
 
         #region .: Função de ativação para cada nivel definido anteriormente :.
@@ -104,7 +105,7 @@ class ConsulsaoComa(Resource):
 
             saida_azul_regras = np.fmin(
                 np.fmax(Convulsao_level_baixo, DadosVitaisAlterados_level_baixo)
-                , saida_verde)
+                , saida_azul)
 
             aggregated = np.fmax(np.fmax(saida_azul_regras, saida_verde_regras), np.fmax(saida_amarelo_regras, saida_vermelho_regras))
             #endregion
@@ -114,17 +115,14 @@ class ConsulsaoComa(Resource):
 
             defuzz = ''
 
-            if result < 0 and result >= 10:
+            if result < 0 and result >= 15:
                 defuzz = 'Azul'
-            elif result < 11 and result >= 20:
+            elif result < 16 and result >= 29:
                 defuzz = 'Verde'
-            elif result < 21 and result >= 30:
+            elif result < 30 and result >= 43:
                 defuzz = 'Amarelo'
-            elif result < 31 and result >= 40:
-                defuzz = 'Laranja'
             else:
                 defuzz = 'Vermelho'
-
             #endregion
 
             return {'manchester': defuzz }
