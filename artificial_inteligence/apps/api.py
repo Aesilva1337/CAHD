@@ -28,7 +28,7 @@ def configure_api(app):
     api.add_resource(Cefaleia, '/cefaleia')
 
     # API para calculo da classficação de manchester a partir do diagnostico Convulsão ou Coma
-    api.add_resource(ConsulsaoComa, '/convulsao_coma')
+    api.add_resource(ConsulsaoComa, '/convulsao')
 
     # API para calculo da classficação de manchester a partir do diagnostico Diabetes
     api.add_resource(Diabetes, '/diabetes')

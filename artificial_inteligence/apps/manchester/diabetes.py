@@ -165,11 +165,11 @@ class Diabetes(Resource):
 
             defuzz = ''
 
-            if result < 0 and result >= 15:
+            if result > 0 and result <= 15:
                 defuzz = 'Azul'
-            elif result < 16 and result >= 29:
+            elif result > 16 and result <= 29:
                 defuzz = 'Verde'
-            elif result < 30 and result >= 43:
+            elif result > 30 and result <= 43:
                 defuzz = 'Amarelo'
             else:
                 defuzz = 'Vermelho'

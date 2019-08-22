@@ -18,12 +18,12 @@ class Cefaleia(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if DadosVitaisAlterados is None or DadosVitaisAlterados == '': DadosVitaisAlterados = 0
-        if Dor is None or Dor == '': Dor = 0
-        if Nuca is None or Nuca == '': Nuca = 0
-        if SinaisNeurologicos is None or SinaisNeurologicos == '': SinaisNeurologicos = 0
-        if PAD is None or PAD == '': PAD = 0
-        if PAS is None or PAS == '': PAD = 0    
+        if DadosVitaisAlterados is None or DadosVitaisAlterados == '': DadosVitaisAlterados = 10
+        if Dor is None or Dor == '': Dor = 10
+        if Nuca is None or Nuca == '': Nuca = 10
+        if SinaisNeurologicos is None or SinaisNeurologicos == '': SinaisNeurologicos = 10
+        if PAD is None or PAD == '': PAD = 10
+        if PAS is None or PAS == '': PAD = 10    
         #endregion
 
         #region .: Definição do range de cada sintoma :.
@@ -126,16 +126,13 @@ class Cefaleia(Resource):
 
             defuzz = ''
 
-            if result < 0 and result >= 10:
-                defuzz = 'Azul'
-            elif result < 11 and result >= 20:
+            if result > 0 and  result <= 20:
                 defuzz = 'Verde'
-            elif result < 21 and result >= 30:
+            elif result > 21 and result <= 40:
                 defuzz = 'Amarelo'
-            elif result < 31 and result >= 40:
-                defuzz = 'Laranja'
             else:
                 defuzz = 'Vermelho'
+
 
             #endregion
 

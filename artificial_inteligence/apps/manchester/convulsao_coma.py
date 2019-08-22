@@ -17,11 +17,11 @@ class ConsulsaoComa(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if DadosVitaisAlterados is None or DadosVitaisAlterados == '': DadosVitaisAlterados = 0
-        if Glasgow is None or Glasgow == '': Glasgow = 0  
-        if IntoxicacaoExogena is None or IntoxicacaoExogena == '': IntoxicacaoExogena = 0
-        if Convulsao is None or Convulsao == '': Convulsao = 0  
-        if Epilepsia is None or Epilepsia == '': Epilepsia = 0  
+        if DadosVitaisAlterados is None or DadosVitaisAlterados == '': DadosVitaisAlterados = 10
+        if Glasgow is None or Glasgow == '': Glasgow = 10  
+        if IntoxicacaoExogena is None or IntoxicacaoExogena == '': IntoxicacaoExogena = 10
+        if Convulsao is None or Convulsao == '': Convulsao = 10  
+        if Epilepsia is None or Epilepsia == '': Epilepsia = 10  
         #endregion
 
         #region .: Definição do range de cada sintoma :.
@@ -115,11 +115,11 @@ class ConsulsaoComa(Resource):
 
             defuzz = ''
 
-            if result < 0 and result >= 15:
+            if result > 0 and result <= 15:
                 defuzz = 'Azul'
-            elif result < 16 and result >= 29:
+            elif result > 16 and result <= 29:
                 defuzz = 'Verde'
-            elif result < 30 and result >= 43:
+            elif result > 30 and result <= 43:
                 defuzz = 'Amarelo'
             else:
                 defuzz = 'Vermelho'
