@@ -10,7 +10,7 @@ class Diabetes(Resource):
         #en = {1:"Azul", 2: "Verde", 3: "Amarelo", 4: "Laranja", 5: "Vermelho"} // Classificação de Manchester
         #region .: Variaveis de Entrada :.
         Glicemia = request.args.get('Glicemia')
-        Sudorose = request.args.get('Sudorose')
+        Sudorese = request.args.get('Sudorose')
         Desidratacao = request.args.get('Desidratacao')
         AlteracaoMental = request.args.get('AlteracaoMental')
         Febre = request.args.get('Febre')
@@ -21,20 +21,20 @@ class Diabetes(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if Glicemia is None or Glicemia == '': Glicemia = 0 
-        if Sudorose is None or Sudorose == '': Sudorose = 0 
-        if Desidratacao is None or Desidratacao == '': Desidratacao = 0 
-        if AlteracaoMental is None or AlteracaoMental == '': AlteracaoMental = 0 
-        if Febre is None or Febre == '': Febre = 0 
-        if Pulso is None or Pulso == '': Pulso = 0 
-        if Vomito is None or Vomito == '': Vomito = 0 
-        if VisaoBorrada is None or VisaoBorrada == '': VisaoBorrada = 0 
-        if Dispneia is None or Dispneia == '': Dispneia = 0 
+        if Glicemia is None or Glicemia == '': Glicemia = 10 
+        if Sudorese is None or Sudorese == '': Sudorese = 10 
+        if Desidratacao is None or Desidratacao == '': Desidratacao = 10 
+        if AlteracaoMental is None or AlteracaoMental == '': AlteracaoMental = 10 
+        if Febre is None or Febre == '': Febre = 10 
+        if Pulso is None or Pulso == '': Pulso = 10 
+        if Vomito is None or Vomito == '': Vomito = 10 
+        if VisaoBorrada is None or VisaoBorrada == '': VisaoBorrada = 10 
+        if Dispneia is None or Dispneia == '': Dispneia = 10 
         #endregion
 
         #region .: Definição do range de cada sintoma :.
         vl_Glicemia = np.arange(0, 361, 1)
-        vl_Sudorose = np.arange(0, 101, 1)
+        vl_Sudorese = np.arange(0, 101, 1)
         vl_Desidratacao = np.arange(0, 101, 1)
         vl_AlteracaoMental = np.arange(0, 101, 1)
         vl_Febre = np.arange(0, 101, 1)
@@ -51,9 +51,9 @@ class Diabetes(Resource):
         Glicemia_alto = fuzz.trimf(vl_Glicemia,[320, 340, 360])
         Glicemia_baixo_alto = fuzz.trimf(vl_Glicemia, [0, 25, 50])
 
-        Sudorose_baixo = fuzz.trimf(vl_Sudorose, [0, 30, 45])
-        Sudorose_normal = fuzz.trimf(vl_Sudorose, [35, 60, 85])
-        Sudorose_alto = fuzz.trimf(vl_Sudorose, [80, 90, 100])
+        Sudorese_baixo = fuzz.trimf(vl_Sudorese, [0, 30, 45])
+        Sudorese_normal = fuzz.trimf(vl_Sudorese, [35, 60, 85])
+        Sudorese_alto = fuzz.trimf(vl_Sudorese, [80, 90, 100])
 
         Desidratacao_baixo = fuzz.trimf(vl_Desidratacao, [0, 30, 45])
         Desidratacao_normal = fuzz.trimf(vl_Desidratacao, [35, 60, 85])
@@ -95,9 +95,9 @@ class Diabetes(Resource):
         Glicemia_level_alto = fuzz.interp_membership(vl_Glicemia, Glicemia_alto, Glicemia)
         Glicemia_level_baixo_alto = fuzz.interp_membership(vl_Glicemia, Glicemia_baixo_alto, Glicemia)
 
-        Sudorose_level_baixo = fuzz.interp_membership(vl_Sudorose, Sudorose_baixo, Sudorose)
-        Sudorose_level_medio = fuzz.interp_membership(vl_Sudorose, Sudorose_normal, Sudorose)
-        Sudorose_level_alto = fuzz.interp_membership(vl_Sudorose, Sudorose_alto, Sudorose)
+        Sudorese_level_baixo = fuzz.interp_membership(vl_Sudorese, Sudorese_baixo, Sudorese)
+        Sudorese_level_medio = fuzz.interp_membership(vl_Sudorese, Sudorese_normal, Sudorese)
+        Sudorese_level_alto = fuzz.interp_membership(vl_Sudorese, Sudorese_alto, Sudorese)
 
         Desidratacao_level_baixo = fuzz.interp_membership(vl_Desidratacao, Desidratacao_baixo, Desidratacao)
         Desidratacao_level_medio = fuzz.interp_membership(vl_Desidratacao, Desidratacao_normal, Desidratacao)
@@ -132,7 +132,7 @@ class Diabetes(Resource):
             #region .: Definição das regras para o valor de saida :.
             saida_vermelho_regras = np.fmin(
                 np.fmax(
-                    np.fmax(AlteracaoMental_level_alto, Sudorose_level_alto),
+                    np.fmax(AlteracaoMental_level_alto, Sudorese_level_alto),
                     np.fmax(
                         np.fmax(
                             np.fmax(Febre_level_alto, Pulso_level_alto),
