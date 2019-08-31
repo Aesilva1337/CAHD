@@ -23,7 +23,7 @@ class Cefaleia(Resource):
         if Nuca is None or Nuca == '': Nuca = 10
         if SinaisNeurologicos is None or SinaisNeurologicos == '': SinaisNeurologicos = 10
         if PAD is None or PAD == '': PAD = 10
-        if PAS is None or PAS == '': PAD = 10    
+        if PAS is None or PAS == '': PAS = 10    
         #endregion
 
         #region .: Definição do range de cada sintoma :.
