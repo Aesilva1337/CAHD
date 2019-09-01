@@ -1,3 +1,4 @@
+import 'package:cahd/constants/navigation.dart';
 import 'package:cahd/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class MyHomePage extends StatelessWidget {
       body: MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: Routes.generateRoutes,
-        initialRoute: '/',
+        initialRoute: NavigationConstrants.LOGIN,
       ),
     );
   }

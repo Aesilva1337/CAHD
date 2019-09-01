@@ -1,6 +1,8 @@
 import 'package:cahd/constants/navigation.dart';
+import 'package:cahd/pages/classificacao.dart';
 import 'package:cahd/pages/home.dart';
 import 'package:cahd/pages/list-patients.dart';
+import 'package:cahd/pages/login.page.dart';
 import 'package:cahd/pages/patient.dart';
 import 'package:cahd/pages/triagem.page.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,10 @@ class Routes {
         return buildRoute(settings, PatientPage());
       case NavigationConstrants.CLASSIFIC:
         return buildRoute(settings, Classificacao());
+      case NavigationConstrants.CLASSIFICT:
+        return buildRoute(settings, ClassificacaoT());
+      case NavigationConstrants.LOGIN:
+        return buildRoute(settings, LoginPage());
       default:
         return buildRoute(settings, HomePage());
     }
