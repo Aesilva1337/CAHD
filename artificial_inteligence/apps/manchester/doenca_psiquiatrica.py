@@ -115,5 +115,5 @@ class DoencaPsiquiatrica(Resource):
             #endregion
 
             return {'manchester': defuzz }
-        except:
-            return {'erro': 'Ocorreu um erro, por favor tente novamente!'}
+        except Exception as e:
+            return {'erro': e.__str__()}

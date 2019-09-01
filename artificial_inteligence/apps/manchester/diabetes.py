@@ -10,7 +10,7 @@ class Diabetes(Resource):
         #en = {1:"Azul", 2: "Verde", 3: "Amarelo", 4: "Laranja", 5: "Vermelho"} // Classificação de Manchester
         #region .: Variaveis de Entrada :.
         Glicemia = request.args.get('Glicemia')
-        Sudorese = request.args.get('Sudorose')
+        Sudorese = request.args.get('Sudorese')
         Desidratacao = request.args.get('Desidratacao')
         AlteracaoMental = request.args.get('AlteracaoMental')
         Febre = request.args.get('Febre')
@@ -176,5 +176,5 @@ class Diabetes(Resource):
             #endregion
 
             return {'manchester': defuzz }
-        except:
-            return {'erro': 'Ocorreu um erro, por favor tente novamente!'}
+        except Exception as e:
+            return {'erro': e.__str__()}

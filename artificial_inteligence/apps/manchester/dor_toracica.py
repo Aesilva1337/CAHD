@@ -83,7 +83,7 @@ class DorToracica(Resource):
             )
 
             saida_amarelo_regras = np.fmin(
-                no.fmax(
+                np.fmax(
                     np.fmax(DadosVitaisAlterados_level_medio, Dor_level_medio),
                     np.fmax(FrequenciaDor_level_medio, Idade_level_alto)
                 )
@@ -127,5 +127,5 @@ class DorToracica(Resource):
             #endregion
 
             return { 'manchester': defuzz }
-        except:
-            return {'erro': 'Ocorreu um erro, por favor tente novamente!'}
+        except Exception as e:
+            return {'erro': e.__str__()}

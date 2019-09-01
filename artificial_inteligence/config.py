@@ -2,9 +2,9 @@ from os import getenv
 
 
 class Config:
-    SECRET_KEY = getenv('SECRET_KEY')
     APP_PORT = int(getenv('APP_PORT'))
     DEBUG = eval(getenv('DEBUG').title())
+    MONGODB_HOST = getenv('MONGODB_URI')
 
 
 class DevelopmentConfig(Config):
