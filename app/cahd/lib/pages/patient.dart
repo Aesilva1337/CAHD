@@ -70,11 +70,11 @@ class PatientPage extends StatelessWidget {
                       color: Colors.blueAccent,
                       onPressed: () {
                         Navigator.pushNamed(
-                            context, NavigationConstrants.CLASSIFIC);
+                            context, NavigationConstrants.CLASSIFICT);
                       },
                     ),
                   ),
-                  Text("Teste"),
+                  Doctor(),
                   Text("Teste"),
                 ],
               ),
@@ -156,13 +156,41 @@ class About extends StatelessWidget {
               label: "Nome Mãe",
               text: form.nomeMae,
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Doctor extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(bottom: 10, top: 10),
+              child: Center(
+                child: Text(
+                  "Informações Médico",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
             FieldForm(
-              label: "Médico",
-              text: form.medico,
+              label: "Nome Médico",
+              text: "Aline Stivanin",
             ),
             FieldForm(
               label: "CRM",
-              text: form.crm,
+              text: "1889974",
             ),
           ],
         ),

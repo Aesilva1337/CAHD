@@ -1,103 +1,127 @@
+import 'package:cahd/models/classificacao.model.dart';
 import 'package:flutter/material.dart';
 
-class Classificacao extends StatelessWidget {
+class ClassificacaoState extends State<Classificacao> {
+  bool checked = false;
+  bool expd = false;
+  double slider = 0.0;
+  int mans = int.parse("0");
+
+  change() {
+    var value = mans;
+    if (value > 3) {
+      value--;
+    } else {
+      value++;
+    }
+    setState(() {
+      mans = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('ExpansionTile'),
-        ),
-        body: ListView.builder(
-          itemBuilder: (BuildContext context, int index) =>
-              EntryItem(data[index]),
-          itemCount: data.length,
+    var manc = Manchester.getValues();
+
+    return Scaffold(
+      appBar: AppBar(),
+      body: Container(
+        child: ListView(
+          children: <Widget>[
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(
+                  width: 50,
+                  height: 75,
+                  child: Card(
+                    color: manc[mans].color,
+                    child: RotatedBox(
+                        quarterTurns: 1,
+                        child: Container(
+                          padding: EdgeInsets.all(2),
+                          child: Center(
+                            child: Text(
+                              manc[mans].title,
+                              textScaleFactor: 0.8,
+                            ),
+                          ),
+                        )),
+                  ),
+                ),
+                Expanded(
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 75,
+                    child: Card(
+                      color: manc[mans].color,
+                      child: Center(
+                        child: Container(
+                          padding: EdgeInsets.all(10),
+                          child: Text(manc[mans].descricao),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            ExpansionPanelList(
+              expansionCallback: (int index, bool isExpanded) {
+                setState(() {});
+              },
+              children: [
+                ExpansionPanel(
+                  headerBuilder: (BuildContext context, bool isExpanded) {
+                    return ListTile(
+                      selected: checked,
+                      title: Text("Sudorese (hipoglicemia)"),
+                      onTap: () {
+                        setState(() {
+                          expd = !isExpanded;
+                        });
+                      },
+                      leading: Checkbox(
+                        onChanged: (bool check) {
+                          change();
+                          setState(() {
+                            checked = check;
+                            expd = check;
+                          });
+                        },
+                        value: checked,
+                      ),
+                    );
+                  },
+                  body: Container(
+                      child: Stack(
+                    children: <Widget>[
+                      Text("P"),
+                      Slider(
+                        label: "Values",
+                        activeColor: Colors.blueGrey,
+                        onChanged: (double change) {
+                          setState(() {
+                            slider = change;
+                          });
+                        },
+                        value: slider,
+                        max: 100,
+                      ),
+                    ],
+                  )),
+                  isExpanded: checked && expd,
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );
   }
 }
 
-// One entry in the multilevel list displayed by this app.
-class Entry {
-  Entry(this.title, this.type, [this.children = const <Entry>[]]);
-
-  final dynamic type;
-  final String title;
-  final List<Entry> children;
-}
-
-// The entire multilevel list displayed by this app.
-final List<Entry> data = <Entry>[
-  Entry(
-    'Sudorese (Hipoglicemia)',
-    <Entry>[
-      Entry('Item A0.1'),
-      Entry('Item A0.2'),
-      Entry('Item A0.3'),
-    ],
-  ),
-  Entry('Alteração mental (hipo-hiperglicemia)', <Entry>[]),
-  Entry('Febre'),
-  Entry('Pulso anormal'),
-  Entry('Vômito'),
-  Entry('Visão borrada'),
-  Entry('Dispnéia'),
-  Entry(
-    'Section A0',
-    <Entry>[
-      Entry('Item A0.1'),
-      Entry('Item A0.2'),
-      Entry('Item A0.3'),
-    ],
-  ),
-];
-
-// Displays one Entry. If the entry has children then it's displayed
-// with an ExpansionTile.
-class EntryItemState extends State<EntryItem> {
-  SingingCharacter character = SingingCharacter.jefferson;
-
-  EntryItemState(this.entry);
-
-  final Entry entry;
-
-  Widget _buildTiles(Entry root) {
-    if (root.children.isEmpty)
-      return RadioListTile<SingingCharacter>(
-        title: const Text('Thomas Jefferson'),
-        value: root.title == "Item A0.1"
-            ? SingingCharacter.jefferson
-            : SingingCharacter.lafayette,
-        groupValue: character,
-        onChanged: (SingingCharacter value) {
-          setState(() {
-            character = value;
-          });
-        },
-      );
-    return ExpansionTile(
-      key: PageStorageKey<Entry>(root),
-      title: Text(root.title),
-      leading: Checkbox(
-        onChanged: (bool checks) {},
-        value: false,
-      ),
-      children: root.children.map(_buildTiles).toList(),
-    );
-  }
-
+class Classificacao extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return _buildTiles(entry);
-  }
+  ClassificacaoState createState() => ClassificacaoState();
 }
-
-class EntryItem extends StatefulWidget {
-  final Entry entry;
-  const EntryItem(this.entry);
-  @override
-  EntryItemState createState() => EntryItemState(this.entry);
-}
-
-enum SingingCharacter { lafayette, jefferson }
