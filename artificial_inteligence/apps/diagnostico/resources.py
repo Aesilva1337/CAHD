@@ -15,6 +15,6 @@ class Diagnostico(Resource):
 
         try:
             diagnosticoList = DiagnosticoModel.objects()
-            return json.loads(diagnosticoList.to_json())
+            return {'data':json.loads(diagnosticoList.to_json())}
         except Exception as e:
             return {'erro': e.__str__()}
