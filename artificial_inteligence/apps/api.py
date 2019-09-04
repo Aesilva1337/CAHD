@@ -12,6 +12,7 @@ from apps.diagnostico.resources import Diagnostico
 from apps.paciente.resources import Paciente
 from apps.paciente.resources import ListaEspera
 from apps.classificacao.resources import Classificacao
+from apps.usuario.resources import Login
 
 # Criamos uma classe que extende de Resource
 class Index(Resource):
@@ -43,7 +44,7 @@ def configure_api(app):
     api.add_resource(Diabetes, '/diabetes')
 
     # API para calculo da classficação de manchester a partir do diagnostico Doença Psiquiatrica
-    api.add_resource(DoencaPsiquiatrica, '/doencaPsiquiatrica')
+    api.add_resource(DoencaPsiquiatrica, '/doenca_psiquiatrica')
 
     # API para calculo da classficação de manchester a partir do diagnostico Dor Abdominal
     api.add_resource(DorAbdominal, '/dor_abdominal')
@@ -65,6 +66,9 @@ def configure_api(app):
     
     # API para listagem de classificação de manchester
     api.add_resource(Classificacao, '/classificacao_machester' )
+
+    # API para listagem de classificação de manchester
+    api.add_resource(Login, '/login' )
 
     # inicializamos a api com as configurações do flask vinda por parâmetro
     api.init_app(app)

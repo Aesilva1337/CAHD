@@ -33,4 +33,5 @@ class DiagnosticoModel(db.Document):
     meta = {'collection': 'diagnosis'}
 
     diagnosis_name = StringField()
+    path_service = StringField()
     sympton = ListField(EmbeddedDocumentField(SintomaModel))
