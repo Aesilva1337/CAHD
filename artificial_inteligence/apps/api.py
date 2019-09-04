@@ -11,6 +11,7 @@ from apps.manchester.ferida import Ferida
 from apps.diagnostico.resources import Diagnostico
 from apps.paciente.resources import Paciente
 from apps.paciente.resources import ListaEspera
+from apps.classificacao.resources import Classificacao
 
 # Criamos uma classe que extende de Resource
 class Index(Resource):
@@ -61,6 +62,9 @@ def configure_api(app):
     
     # API para listagem de diagnostico
     api.add_resource(Paciente, '/pacientes/<string:cpf>', '/pacientes')
+    
+    # API para listagem de classificação de manchester
+    api.add_resource(Classificacao, '/classificacao_machester' )
 
     # inicializamos a api com as configurações do flask vinda por parâmetro
     api.init_app(app)

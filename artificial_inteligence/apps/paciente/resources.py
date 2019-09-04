@@ -28,7 +28,6 @@ class ListaEspera(Resource):
     def get(self):
         try:
             waitList = ListaEsperaModel.objects()
-            print(waitList)
             return {'data':json.loads(waitList.to_json())}
         except Exception as e:
             return {'erro': e.__str__()}
