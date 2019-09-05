@@ -29,8 +29,7 @@ class Login(Resource):
             return resp_data_invalid('Login', errors)
 
         try:
-            usuarioList = UsuarioModel.objects.get(cpf=data['cpf'], password=data['password']) 
-            print('list: ', usuarioList)
+            usuarioList = UsuarioModel.objects.get(cpf=data['cpf'], password=data['password'])
             return resp_ok('Login', MSG_SUCCESS, json.loads(usuarioList.to_json()))
         except DoesNotExist:
             return resp_does_not_exist('Login', MSG_PASSWORD_OR_CPF_INVALID)      
