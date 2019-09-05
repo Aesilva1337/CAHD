@@ -165,12 +165,12 @@ class Diabetes(Resource):
 
             #region .: Defuzzificação e retorno de label para o serviço :.
             result = fuzz.defuzzify.defuzz(x_saida, aggregated, 'mom')
-
+            print(result)
             defuzz = ''
 
             if result > 0 and result <= 15:
                 defuzz = 'Azul'
-            elif result > 16 and result <= 29:
+            elif result > 15 and result <= 30:
                 defuzz = 'Verde'
             elif result > 30 and result <= 43:
                 defuzz = 'Amarelo'

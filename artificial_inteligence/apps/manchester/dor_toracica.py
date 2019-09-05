@@ -119,7 +119,7 @@ class DorToracica(Resource):
 
             if result > 0 and result <= 15:
                 defuzz = 'Azul'
-            elif result > 16 and result <= 29:
+            elif result > 15 and result <= 30:
                 defuzz = 'Verde'
             elif result > 30 and result <= 43:
                 defuzz = 'Amarelo'

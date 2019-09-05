@@ -131,7 +131,7 @@ class Cefaleia(Resource):
 
             if result > 0 and  result <= 20:
                 defuzz = 'Verde'
-            elif result > 21 and result <= 40:
+            elif result > 20 and result <= 40:
                 defuzz = 'Amarelo'
             else:
                 defuzz = 'Vermelho'
