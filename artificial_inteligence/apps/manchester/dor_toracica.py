@@ -19,10 +19,10 @@ class DorToracica(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if DadosVitaisAlterados is None or DadosVitaisAlterados == '': DadosVitaisAlterados = 10
-        if Dor is None or Dor == '': Dor = 10 
-        if FrequenciaDor is None or FrequenciaDor == '': FrequenciaDor = 10 
-        if Idade is None or Idade == '': Idade = 10 
+        if DadosVitaisAlterados is None or DadosVitaisAlterados == '' or DadosVitaisAlterados < 10: DadosVitaisAlterados = 10
+        if Dor is None or Dor == '' or Dor < 10: Dor = 10 
+        if FrequenciaDor is None or FrequenciaDor == '' or FrequenciaDor < 10: FrequenciaDor = 10 
+        if Idade is None or Idade == '' or Idade < 10: Idade = 10 
         #endregion
 
         #region .: Definição do range de cada sintoma :.
