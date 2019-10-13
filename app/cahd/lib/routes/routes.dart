@@ -2,9 +2,9 @@ import 'package:cahd/constants/navigation.dart';
 import 'package:cahd/pages/classificacao.dart';
 import 'package:cahd/pages/home.dart';
 import 'package:cahd/pages/list-patients.dart';
-import 'package:cahd/pages/login.page.dart';
+import 'package:cahd/pages/login.dart';
 import 'package:cahd/pages/patient.dart';
-import 'package:cahd/pages/triagem.page.dart';
+import 'package:cahd/pages/triagem.dart';
 import 'package:flutter/material.dart';
 
 class Routes {

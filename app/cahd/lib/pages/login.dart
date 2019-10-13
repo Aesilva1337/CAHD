@@ -1,9 +1,13 @@
 import 'package:cahd/constants/navigation.dart';
+import 'package:cahd/services/user-service.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var api = UserService();
+    var cpfControl = TextEditingController(text: "12558384694");
+    var passControl = TextEditingController(text: "Stefanini@10");
     return Scaffold(
       body: Container(
         padding: EdgeInsets.only(top: 60, left: 40, right: 40),
@@ -20,9 +24,11 @@ class LoginPage extends StatelessWidget {
             ),
             TextFormField(
               // autofocus: true,
-              keyboardType: TextInputType.emailAddress,
+              keyboardType: TextInputType.number,
+              maxLength: 11,
+              autofocus: true,
               decoration: InputDecoration(
-                labelText: "E-mail",
+                labelText: "CPF",
                 labelStyle: TextStyle(
                   color: Colors.black38,
                   fontWeight: FontWeight.w400,
@@ -30,6 +36,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               style: TextStyle(fontSize: 20),
+              controller: cpfControl,
             ),
             SizedBox(
               height: 10,
@@ -47,6 +54,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               style: TextStyle(fontSize: 20),
+              controller: passControl,
             ),
             SizedBox(
               height: 40,
@@ -92,7 +100,27 @@ class LoginPage extends StatelessWidget {
                     ],
                   ),
                   onPressed: () {
-                    Navigator.pushNamed(context, NavigationConstrants.HOME);
+                    api.login(cpfControl.text, passControl.text).then((e) => {
+                          if (!e)
+                            {
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    // Retrieve the text the user has entered by using the
+                                    // TextEditingController.
+                                    content: Text("Cpf ou Senha Incorreto"),
+                                  );
+                                },
+                              )
+                            }
+                          else
+                            {
+                              Navigator.popAndPushNamed(
+                                  context, NavigationConstrants.HOME),
+                            }
+                        });
+
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(

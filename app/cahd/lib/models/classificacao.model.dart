@@ -1,3 +1,5 @@
+import 'package:cahd/services/base.dart';
+import 'package:cahd/services/classificacao-service.dart';
 import 'package:flutter/material.dart';
 
 class ClassificacaoModel {
@@ -23,29 +25,29 @@ class Manchester {
   String title;
   String descricao;
 
-  static List<Manchester> getValues() {
-    return [
-      Manchester(
+  static Map<Color, Manchester> getValues() {
+    return {
+      Colors.red: Manchester(
           Colors.red,
           "Emergência: Caso gravìssimo, com necessidade de atendimento imediato e risco de morte.",
           "Emergência"),
-      Manchester(
+      Colors.orange: Manchester(
           Colors.orange,
           "Muito Urgente: Caso grave e risco sifnificativo de evoluir para morte. Atendimento urgente.",
           "Muito Urgente"),
-      Manchester(
+      Colors.yellow: Manchester(
           Colors.yellow,
           "Urgente: Caso de gravidade moderada, necessidade de atendimento médico, sem risco imediato.",
           "Urgente"),
-      Manchester(
+      Colors.green: Manchester(
           Colors.green,
           "Pouco Urgente: Caso para atendimento preferencial nas unidades de atenção básica.",
           "Pouco Urgente"),
-      Manchester(
+      Colors.blue: Manchester(
           Colors.blueAccent,
           "Não Urgente: Caso para atendimento na unidade de saúde mais próxima da residência. Atendimento de acordo com o horário de chegada ou serão direcionadas às Estratégias de Saúde da Família ou Unidades Básicas de Saúde. Queixas crônicas; resfriados; contusões; escoriações; dor de garganta; ferimentos que não requerem fechamento e outros.",
           "Não Urgente"),
-    ];
+    };
   }
 }
 

@@ -1,107 +1,156 @@
 import 'package:cahd/constants/navigation.dart';
 import 'package:cahd/models/formulario.model.dart';
-import 'package:cahd/pages/triagem.page.dart';
+import 'package:cahd/pages/classificacao.dart';
+import 'package:cahd/pages/triagem.dart';
+import 'package:cahd/services/pacientes-service.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_file.dart';
+import 'package:intl/intl.dart';
 
 class PatientPageArguments {
-  final int idPatient;
-  PatientPageArguments(this.idPatient);
+  final String cpf;
+  PatientPageArguments(this.cpf);
 }
 
 class PatientPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PatientPageArguments args = ModalRoute.of(context).settings.arguments;
+    var api = new PacienteService();
+    return FutureBuilder<PacienteResponse>(
+        future: api.getPaciente(args.cpf),
+        builder: (context, snapshot) {
+          if (snapshot.data == null) {
+            return new Center(
+              child: new CircularProgressIndicator(),
+            );
+          }
+          var paciente = snapshot.data?.lista[0];
 
-    return Scaffold(
-      body: Container(
-        child: DefaultTabController(
-          length: 4,
-          child: NestedScrollView(
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return <Widget>[
-                SliverAppBar(
-                  expandedHeight: 200.0,
-                  floating: false,
-                  pinned: true,
-                  flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: true,
-                    title: Text("Arthur Elidio da Silva",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16.0,
-                        )),
-                    background: person(),
-                  ),
-                ),
-                SliverPersistentHeader(
-                  delegate: _SliverAppBarDelegate(
-                    TabBar(
-                      labelColor: Colors.black87,
-                      unselectedLabelColor: Colors.grey,
-                      tabs: [
-                        Tab(
-                          icon: Icon(Icons.recent_actors),
+          return Scaffold(
+            body: Container(
+              child: DefaultTabController(
+                length: 4,
+                child: NestedScrollView(
+                  headerSliverBuilder:
+                      (BuildContext context, bool innerBoxIsScrolled) {
+                    return <Widget>[
+                      SliverAppBar(
+                        expandedHeight: 200.0,
+                        floating: false,
+                        pinned: true,
+                        flexibleSpace: FlexibleSpaceBar(
+                          centerTitle: true,
+                          title: Text(paciente.name,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 16.0,
+                              )),
+                          background: person(),
                         ),
-                        Tab(
-                          icon: Icon(Icons.local_hospital),
+                      ),
+                      SliverPersistentHeader(
+                        delegate: _SliverAppBarDelegate(
+                          TabBar(
+                            labelColor: Colors.black87,
+                            unselectedLabelColor: Colors.grey,
+                            tabs: [
+                              Tab(
+                                icon: Icon(Icons.recent_actors),
+                              ),
+                              Tab(
+                                icon: Icon(Icons.local_hospital),
+                              ),
+                              Tab(
+                                icon: Icon(Icons.assignment_ind),
+                              ),
+                              Tab(
+                                icon: Icon(Icons.history),
+                              ),
+                            ],
+                          ),
                         ),
-                        Tab(
-                          icon: Icon(Icons.assignment_ind),
+                        pinned: false,
+                      ),
+                    ];
+                  },
+                  body: Container(
+                    child: TabBarView(
+                      children: <Widget>[
+                        About(paciente),
+                        Center(
+                          child: FlatButton(
+                            child: Text("Iniciar Classificacao"),
+                            color: Colors.blueAccent,
+                            onPressed: () {
+                              Navigator.popAndPushNamed(
+                                context,
+                                NavigationConstrants.CLASSIFICT,
+                                arguments:
+                                    ClassificacaoArgs(paciente: paciente),
+                              );
+                            },
+                          ),
                         ),
-                        Tab(
-                          icon: Icon(Icons.history),
+                        Doctor(),
+                        Container(
+                          child: FutureBuilder<List<FinalizarClassificacao>>(
+                            future: api.getHistorico(args.cpf),
+                            builder: (context, snapshot) {
+                              var hist = snapshot.data;
+
+                              if (hist == null || hist.length == 0) {
+                                return Center(
+                                  child: Text("Sem Histórico"),
+                                );
+                              }
+                              return Column(
+                                children: List.generate(hist.length, (index) {
+                                  return Center(
+                                      child: Row(
+                                    children: <Widget>[
+                                      Container(
+                                        padding: EdgeInsets.all(10),
+                                        width: 150,
+                                        child: Text(
+                                            "Classificacao: ${hist[index].manchester_classification.toString()}"),
+                                      ),
+                                      Text(
+                                          "Data: ${DateFormat("dd/MM/yyyy hh:mm:ss").format(DateTime.fromMillisecondsSinceEpoch(int.parse(hist[index].attendance_date))).toString()}")
+                                    ],
+                                  ));
+                                }),
+                              );
+                            },
+                          ),
                         ),
                       ],
                     ),
                   ),
-                  pinned: false,
                 ),
-              ];
-            },
-            body: Container(
-              child: TabBarView(
-                children: <Widget>[
-                  About(),
-                  Center(
-                    child: FlatButton(
-                      child: Text("Iniciar Classificacao"),
-                      color: Colors.blueAccent,
-                      onPressed: () {
-                        Navigator.pushNamed(
-                            context, NavigationConstrants.CLASSIFICT);
-                      },
-                    ),
-                  ),
-                  Doctor(),
-                  Text("Teste"),
-                ],
               ),
             ),
-          ),
-        ),
-      ),
-    );
+          );
+        });
   }
 }
 
 class About extends StatelessWidget {
+  Paciente paciente;
+  About(this.paciente);
   @override
   Widget build(BuildContext context) {
     final form = new FormularioModel();
-    form.nome = "Arthur Elidio da Silva";
-    form.dataNasc = "04/05/1997";
-    form.endereco = "Rua RIo Gande do Sul";
-    form.cep = "13911170";
-    form.municipio = "Jaguariuna";
-    form.nomeMae = "Alaine Cristina Marcfelino da Silva";
-    form.telefone = "99999999";
-    form.crm = "188974";
-    form.medico = "Aline Stivanin Texeira";
+    form.nome = paciente.name;
+    form.dataNasc = paciente.bornDate.toString();
+    form.endereco = "";
+    form.cep = "";
+    form.municipio = "";
+    form.bairro = "";
+    form.nomeMae = paciente.motherName;
+    form.telefone = paciente.telephone;
     form.idade = 21;
-    form.sexo = "M";
-    form.bairro = "Jardim Sonia";
+    form.sexo = paciente.sex;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(20),
@@ -330,4 +379,9 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
     return false;
   }
+}
+
+class Historico extends StatefulWidget {
+  @override
+  ClassificacaoState createState() => ClassificacaoState();
 }

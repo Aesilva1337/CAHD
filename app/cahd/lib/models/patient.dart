@@ -1,8 +1,8 @@
-class Patient{
+class Patient {
   String nome;
   String data;
-  int id;
+  String id;
+  String cpf;
 
-  Patient({this.id, this.data, this.nome});
-
+  Patient({this.id, this.data, this.nome, this.cpf});
 }
