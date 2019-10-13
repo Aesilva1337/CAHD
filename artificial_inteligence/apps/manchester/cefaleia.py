@@ -21,12 +21,12 @@ class Cefaleia(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if DadosVitaisAlterados is None or DadosVitaisAlterados == '': DadosVitaisAlterados = 10
-        if Dor is None or Dor == '': Dor = 10
-        if Nuca is None or Nuca == '': Nuca = 10
-        if SinaisNeurologicos is None or SinaisNeurologicos == '': SinaisNeurologicos = 10
-        if PAD is None or PAD == '': PAD = 10
-        if PAS is None or PAS == '': PAS = 10    
+        if DadosVitaisAlterados is None or DadosVitaisAlterados == '' or DadosVitaisAlterados < 10: DadosVitaisAlterados = 10
+        if Dor is None or Dor == '' or Dor < 10: Dor = 10
+        if Nuca is None or Nuca == '' or Nuca < 10: Nuca = 10
+        if SinaisNeurologicos is None or SinaisNeurologicos == '' or SinaisNeurologicos < 10: SinaisNeurologicos = 10
+        if PAD is None or PAD == '' or PAD < 10: PAD = 10
+        if PAS is None or PAS == '' or PAS < 10: PAS = 10    
         #endregion
 
         #region .: Definição do range de cada sintoma :.

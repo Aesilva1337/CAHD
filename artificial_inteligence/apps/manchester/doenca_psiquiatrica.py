@@ -19,10 +19,10 @@ class DoencaPsiquiatrica(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if DadosVitaisAlterados is None or DadosVitaisAlterados == '': DadosVitaisAlterados = 10
-        if Agitacao is None or Agitacao == '': Agitacao = 10
-        if Depressao is None or Depressao == '': Depressao = 10
-        if EstadoMental is None or EstadoMental == '': EstadoMental = 10
+        if DadosVitaisAlterados is None or DadosVitaisAlterados == '' or DadosVitaisAlterados < 10: DadosVitaisAlterados = 10
+        if Agitacao is None or Agitacao == '' or Agitacao < 10: Agitacao = 10
+        if Depressao is None or Depressao == '' or Depressao < 10: Depressao = 10
+        if EstadoMental is None or EstadoMental == '' or EstadoMental < 10: EstadoMental = 10
         #endregion
 
         #region .: Definição do range de cada sintoma :.

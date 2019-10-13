@@ -24,15 +24,15 @@ class Diabetes(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if Glicemia is None or Glicemia == '': Glicemia = 10 
-        if Sudorese is None or Sudorese == '': Sudorese = 10 
-        if Desidratacao is None or Desidratacao == '': Desidratacao = 10 
-        if AlteracaoMental is None or AlteracaoMental == '': AlteracaoMental = 10 
-        if Febre is None or Febre == '': Febre = 10 
-        if Pulso is None or Pulso == '': Pulso = 10 
-        if Vomito is None or Vomito == '': Vomito = 10 
-        if VisaoBorrada is None or VisaoBorrada == '': VisaoBorrada = 10 
-        if Dispneia is None or Dispneia == '': Dispneia = 10 
+        if Glicemia is None or Glicemia == '' or Glicemia < 10: Glicemia = 10 
+        if Sudorese is None or Sudorese == '' or Sudorese < 10: Sudorese = 10 
+        if Desidratacao is None or Desidratacao == '' or Desidratacao < 10: Desidratacao = 10 
+        if AlteracaoMental is None or AlteracaoMental == '' or AlteracaoMental < 10: AlteracaoMental = 10 
+        if Febre is None or Febre == '' or Febre < 10: Febre = 10 
+        if Pulso is None or Pulso == '' or Pulso < 10: Pulso = 10 
+        if Vomito is None or Vomito == '' or Vomito < 10: Vomito = 10 
+        if VisaoBorrada is None or VisaoBorrada == '' or VisaoBorrada < 10: VisaoBorrada = 10 
+        if Dispneia is None or Dispneia == '' or Dispneia < 10: Dispneia = 10 
         #endregion
 
         #region .: Definição do range de cada sintoma :.
