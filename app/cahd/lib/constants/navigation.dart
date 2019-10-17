@@ -5,4 +5,5 @@ class NavigationConstrants {
   static const String PATIENT = '/patient';
   static const String CLASSIFIC = "/classificacao";
   static const String CLASSIFICT = "/classificacaot";
+  static const String REGISTRY_PATIENT = "/registry_patient";
 }
