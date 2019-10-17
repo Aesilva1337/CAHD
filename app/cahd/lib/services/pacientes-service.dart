@@ -15,12 +15,33 @@ class PacienteService {
     return obj;
   }
 
+  Future<bool> postListaEspera(String cpf) async {
+    var response = await http.post(
+        '${BaseService.BASE}/${BaseService.LISTA_ESPERA}',
+        headers: {"Content-Type": "application/json"},
+        body: json.encode({'cpf': cpf}));
+    var ret = json.decode(response.body)['data'];
+    return response.statusCode == 200;
+  }
+
   Future<PacienteResponse> getPaciente(cpf) async {
     var response =
         await http.get('${BaseService.BASE}/${BaseService.PACIENTE}/$cpf');
-    var ret = json.decode(response.body)['data'];
-    var obj = PacienteResponse.fromJson([ret]);
-    return obj;
+    if (response.statusCode == 200) {
+      var ret = json.decode(response.body)['data'];
+      return PacienteResponse.fromJson([ret]);
+    }
+    return null;
+  }
+
+  Future<Paciente> getPacienteByCpf(cpf) async {
+    var response =
+        await http.get('${BaseService.BASE}/${BaseService.PACIENTE}/$cpf');
+    if (response.statusCode == 200) {
+      var ret = json.decode(response.body)['data'];
+      return Paciente.fromJson(ret);
+    }
+    return null;
   }
 
   Future<List<FinalizarClassificacao>> getHistorico(cpf) async {
@@ -41,6 +62,16 @@ class PacienteService {
         '${BaseService.BASE}/${BaseService.CLASSIFICACAO_MANCHESTER}',
         headers: {"Content-Type": "application/json"},
         body: json.encode(finalizar.toJson()));
+    var ret = json.decode(response.body);
+    var obj = ret["data"] == null ? false : ret["data"]["valido"];
+    return obj;
+  }
+
+  Future<bool> salvar(Paciente paciente) async {
+    var response = await http.post(
+        '${BaseService.BASE}/${BaseService.PACIENTE}',
+        headers: {"Content-Type": "application/json"},
+        body: json.encode(paciente.toJson()));
     var ret = json.decode(response.body);
     var obj = ret["data"] == null ? false : ret["data"]["valido"];
     return obj;
@@ -92,6 +123,17 @@ class Paciente {
       motherName: json["mother_name"],
     );
   }
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'cpf': cpf,
+        'mother_name': motherName,
+        'born_date': DateTime.now().toIso8601String(),
+        'sex': sex,
+        'telephone': telephone,
+        'address': address,
+        'zip_code': zipCode,
+        'city': city,
+      };
   String id;
   String cpf;
   String name;

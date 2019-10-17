@@ -16,7 +16,20 @@ class HomePage extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[_buildCard(context)],
+                children: <Widget>[
+                  _buildCard(
+                      context,
+                      'Diagnostico',
+                      'Processo de Triagem',
+                      'assets/images/medical.png',
+                      NavigationConstrants.LIST_PATIENTS),
+                  _buildCard(
+                      context,
+                      'Paciente',
+                      'Adicionar Paciente',
+                      'assets/images/medical.png',
+                      NavigationConstrants.REGISTRY_PATIENT),
+                ],
               ),
             ),
           );
@@ -25,19 +38,19 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(BuildContext context) => SizedBox(
+  Widget _buildCard(BuildContext context, String title, String subTitle,
+          String urlImg, String route) =>
+      SizedBox(
         child: Card(
           color: Color.fromRGBO(87, 202, 195, 1.0),
           child: ListTile(
-            onTap: () => {
-              Navigator.pushNamed(context, NavigationConstrants.LIST_PATIENTS)
-            },
-            title: Text('Diagnostico',
+            onTap: () => {Navigator.pushNamed(context, route)},
+            title: Text(title,
                 style: TextStyle(
                     fontWeight: FontWeight.w500, color: Colors.white70)),
-            subtitle: Text('Processo de Triagem'),
+            subtitle: Text(subTitle),
             leading: Image.asset(
-              "assets/images/medical.png",
+              urlImg,
               color: Colors.black,
             ),
           ),

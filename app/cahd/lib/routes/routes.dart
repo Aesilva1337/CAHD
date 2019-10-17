@@ -4,6 +4,7 @@ import 'package:cahd/pages/home.dart';
 import 'package:cahd/pages/list-patients.dart';
 import 'package:cahd/pages/login.dart';
 import 'package:cahd/pages/patient.dart';
+import 'package:cahd/pages/registry-patient.dart';
 import 'package:cahd/pages/triagem.dart';
 import 'package:flutter/material.dart';
 
@@ -22,6 +23,8 @@ class Routes {
         return buildRoute(settings, ClassificacaoT());
       case NavigationConstrants.LOGIN:
         return buildRoute(settings, LoginPage());
+      case NavigationConstrants.REGISTRY_PATIENT:
+        return buildRoute(settings, RegistryPatientPage());
       default:
         return buildRoute(settings, HomePage());
     }
