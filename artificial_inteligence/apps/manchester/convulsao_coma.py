@@ -20,11 +20,11 @@ class ConsulsaoComa(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if DadosVitaisAlterados is None or DadosVitaisAlterados == '' or DadosVitaisAlterados < 10: DadosVitaisAlterados = 10
-        if Glasgow is None or Glasgow == '' or Glasgow < 10: Glasgow = 10  
-        if IntoxicacaoExogena is None or IntoxicacaoExogena == '' or IntoxicacaoExogena < 10: IntoxicacaoExogena = 10
-        if Convulsao is None or Convulsao == '' or Convulsao < 10: Convulsao = 10  
-        if Epilepsia is None or Epilepsia == '' or Epilepsia < 10: Epilepsia = 10  
+        if DadosVitaisAlterados is None or DadosVitaisAlterados == '' or int(DadosVitaisAlterados) < 10: DadosVitaisAlterados = 10
+        if Glasgow is None or Glasgow == '' or int(Glasgow < 10): Glasgow = 10  
+        if IntoxicacaoExogena is None or IntoxicacaoExogena == '' or int(IntoxicacaoExogena) < 10: IntoxicacaoExogena = 10
+        if Convulsao is None or Convulsao == '' or int(Convulsao) < 10: Convulsao = 10  
+        if Epilepsia is None or Epilepsia == '' or int(Epilepsia) < 10: Epilepsia = 10  
         #endregion
 
         #region .: Definição do range de cada sintoma :.

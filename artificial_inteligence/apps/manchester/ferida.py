@@ -19,10 +19,10 @@ class Ferida(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if DadosVitaisAlterados is None or DadosVitaisAlterados == ''  or DadosVitaisAlterados < 10: DadosVitaisAlterados = 10
-        if Dor is None or Dor == '' or Dor < 10: Dor = 10 
-        if Idade is None or Idade == '' or Idade < 10: Idade = 10 
-        if Temperatura is None or Temperatura == '' or Temperatura < 10: Temperatura = 10 
+        if DadosVitaisAlterados is None or DadosVitaisAlterados == ''  or int(DadosVitaisAlterados) < 10: DadosVitaisAlterados = 10
+        if Dor is None or Dor == '' or int(Dor) < 10: Dor = 10 
+        if Idade is None or Idade == '' or int(Idade) < 10: Idade = 10 
+        if Temperatura is None or Temperatura == '' or int(Temperatura) < 10: Temperatura = 10 
         #endregion
 
         #region .: Definição do range de cada sintoma :.

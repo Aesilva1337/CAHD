@@ -22,10 +22,10 @@ class Paciente(Resource):
         try:
             if cpf != '' :
                 pacienteList = PacienteModel.objects.get(cpf=cpf) 
-                return resp_ok('Login', MSG_SUCCESS, json.loads(pacienteList.to_json()))
+                return resp_ok('Paciente', MSG_SUCCESS, json.loads(pacienteList.to_json()))
             else:
                 pacienteList = PacienteModel.objects()
-                return resp_ok('Login', MSG_SUCCESS, json.loads(pacienteList.to_json()))           
+                return resp_ok('Paciente', MSG_SUCCESS, json.loads(pacienteList.to_json()))           
         except Exception as e:
             return resp_exception('Paciente', description=e.__str__())
 
@@ -54,7 +54,7 @@ class ListaEspera(Resource):
     def get(self):
         try:
             waitList = ListaEsperaModel.objects()
-            return resp_ok('Login', MSG_SUCCESS, json.loads(waitList.to_json()))
+            return resp_ok('Lista de Espera', MSG_SUCCESS, json.loads(waitList.to_json()))
         except Exception as e:
             return resp_exception('Lista de Espera', description=e.__str__())
 

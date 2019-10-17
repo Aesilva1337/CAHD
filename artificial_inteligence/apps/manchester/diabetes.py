@@ -24,15 +24,15 @@ class Diabetes(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if Glicemia is None or Glicemia == '' or Glicemia < 10: Glicemia = 10 
-        if Sudorese is None or Sudorese == '' or Sudorese < 10: Sudorese = 10 
-        if Desidratacao is None or Desidratacao == '' or Desidratacao < 10: Desidratacao = 10 
-        if AlteracaoMental is None or AlteracaoMental == '' or AlteracaoMental < 10: AlteracaoMental = 10 
-        if Febre is None or Febre == '' or Febre < 10: Febre = 10 
-        if Pulso is None or Pulso == '' or Pulso < 10: Pulso = 10 
-        if Vomito is None or Vomito == '' or Vomito < 10: Vomito = 10 
-        if VisaoBorrada is None or VisaoBorrada == '' or VisaoBorrada < 10: VisaoBorrada = 10 
-        if Dispneia is None or Dispneia == '' or Dispneia < 10: Dispneia = 10 
+        if Glicemia is None or Glicemia == '' or int(Glicemia) < 10: Glicemia = 10 
+        if Sudorese is None or Sudorese == '' or int(Sudorese) < 10: Sudorese = 10 
+        if Desidratacao is None or Desidratacao == '' or int(Desidratacao) < 10: Desidratacao = 10 
+        if AlteracaoMental is None or AlteracaoMental == '' or int(AlteracaoMental) < 10: AlteracaoMental = 10 
+        if Febre is None or Febre == '' or Febre < 10: int(Febre) = 10 
+        if Pulso is None or Pulso == '' or Pulso < 10: int(Pulso) = 10 
+        if Vomito is None or Vomito == '' or Vomito < 10: int(Vomito) = 10 
+        if VisaoBorrada is None or VisaoBorrada == '' or int(VisaoBorrada) < 10: VisaoBorrada = 10 
+        if Dispneia is None or Dispneia == '' or int(Dispneia) < 10: Dispneia = 10 
         #endregion
 
         #region .: Definição do range de cada sintoma :.
