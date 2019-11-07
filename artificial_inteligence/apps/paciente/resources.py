@@ -42,9 +42,12 @@ class Paciente(Resource):
             return resp_data_invalid('Cadastro de Paciente', errors)
 
         try:
-            pacient = PacienteModel(**data)
-            pacient.save()
-            return resp_ok('Cadastro de Paciente', MSG_SUCCESS, json.loads(pacient.to_json()))    
+            model = PacienteModel.objects.get(cpf=data['cpf'])
+            print(model)
+            # PacienteModel.update({'_id':mongo_id}, {"$set": post}, upsert=False)
+            # pacient = PacienteModel(**data)
+            # pacient.save()
+            return resp_ok('Cadastro de Paciente', MSG_SUCCESS, json.loads(model.to_json()))    
         except Exception as e:
             return resp_exception('Cadastro de Paciente', description=e.__str__())
         

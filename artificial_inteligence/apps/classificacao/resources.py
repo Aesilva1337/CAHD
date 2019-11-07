@@ -40,6 +40,7 @@ class Classificacao(Resource):
             triagem = TriagemModel(**data)
             triagem.save()
             ListaEsperaModel.objects.get(cpf=data['cpf']).delete()
+            ListaEsperaModel.save()
             return resp_ok('Triagem', MSG_SUCCESS, {'valido': True})
 
         except Exception as e:
