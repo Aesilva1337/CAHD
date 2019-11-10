@@ -34,27 +34,27 @@ class DorAbdominal(Resource):
         #endregion
 
         #region .: Definição do range da pertinencia de cada sintoma :.
-        DadosVitaisAlterados_baixo = fuzz.trimf(vl_DadosVitaisAlterados, [0, 30, 45])
+        DadosVitaisAlterados_baixo = fuzz.trapmf(vl_DadosVitaisAlterados, [0, 20, 40, 45])
         DadosVitaisAlterados_normal = fuzz.trimf(vl_DadosVitaisAlterados, [35, 60, 85])
-        DadosVitaisAlterados_alto = fuzz.trimf(vl_DadosVitaisAlterados, [80, 90, 100])
+        DadosVitaisAlterados_alto = fuzz.trapmf(vl_DadosVitaisAlterados, [80, 85, 95, 100])
 
-        Dor_baixo = fuzz.trimf(vl_Dor, [0, 25, 50])
+        Dor_baixo = fuzz.trapmf(vl_Dor, [0, 20, 40, 50])
         Dor_moderado = fuzz.trimf(vl_Dor, [40, 50, 70])
         Dor_normal = fuzz.trimf(vl_Dor, [65, 80, 90])
-        Dor_alto = fuzz.trimf(vl_Dor, [80, 95, 100])
+        Dor_alto = fuzz.trapmf(vl_Dor, [80, 85, 95, 100])
 
-        Idade_baixo = fuzz.trimf(vl_Idade, [0, 30, 40])
+        Idade_baixo = fuzz.trapmf(vl_Idade, [0, 20, 40, 40])
         Idade_normal = fuzz.trimf(vl_Idade, [40, 50, 65])
-        Idade_alto = fuzz.trimf(vl_Idade, [65, 85, 100])
+        Idade_alto = fuzz.trapmf(vl_Idade, [65, 85, 95, 100])
 
-        Temperatura_baixo = fuzz.trimf(vl_Temperatura, [25, 30, 36])
+        Temperatura_baixo = fuzz.trapmf(vl_Temperatura, [25, 20, 40, 36])
         Temperatura_normal = fuzz.trimf(vl_Temperatura, [36, 37, 39])
-        Temperatura_alto = fuzz.trimf(vl_Temperatura, [39, 43, 45])
+        Temperatura_alto = fuzz.trapmf(vl_Temperatura, [39, 40, 43, 45])
 
-        saida_azul = fuzz.trimf(x_saida, [0, 7, 15])
+        saida_azul = fuzz.trapmf(x_saida, [0, 3, 12, 15])
         saida_verde = fuzz.trimf(x_saida, [15, 22, 29])
         saida_amarelo = fuzz.trimf(x_saida, [29, 36, 43])
-        saida_vermelho = fuzz.trimf(x_saida, [43, 50, 60])
+        saida_vermelho = fuzz.trapmf(x_saida, [43, 45, 55, 60])
         #endregion
 
         #region .: Função de ativação para cada nivel definido anteriormente :.

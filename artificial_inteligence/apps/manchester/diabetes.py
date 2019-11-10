@@ -24,15 +24,15 @@ class Diabetes(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if Glicemia is None or Glicemia == '' or int(Glicemia) < 10: Glicemia = 10 
-        if Sudorese is None or Sudorese == '' or int(Sudorese) < 10: Sudorese = 10 
-        if Desidratacao is None or Desidratacao == '' or int(Desidratacao) < 10: Desidratacao = 10 
-        if AlteracaoMental is None or AlteracaoMental == '' or int(AlteracaoMental) < 10: AlteracaoMental = 10 
-        if Febre is None or Febre == '' or int(Febre) < 10: Febre = 10 
-        if Pulso is None or Pulso == '' or int(Pulso) < 10: Pulso = 10 
-        if Vomito is None or Vomito == '' or int(Vomito) < 10: Vomito = 10 
-        if VisaoBorrada is None or VisaoBorrada == '' or int(VisaoBorrada) < 10: VisaoBorrada = 10 
-        if Dispneia is None or Dispneia == '' or int(Dispneia) < 10: Dispneia = 10 
+        if Glicemia is None or Glicemia == '': Glicemia = 10 
+        if Sudorese is None or Sudorese == '': Sudorese = 10 
+        if Desidratacao is None or Desidratacao == '': Desidratacao = 10 
+        if AlteracaoMental is None or AlteracaoMental == '': AlteracaoMental = 10 
+        if Febre is None or Febre == '': Febre = 10 
+        if Pulso is None or Pulso == '': Pulso = 10 
+        if Vomito is None or Vomito == '': Vomito = 10 
+        if VisaoBorrada is None or VisaoBorrada == '': VisaoBorrada = 10 
+        if Dispneia is None or Dispneia == '': Dispneia = 10 
         #endregion
 
         #region .: Definição do range de cada sintoma :.
@@ -51,45 +51,45 @@ class Diabetes(Resource):
         #region .: Definição do range da pertinencia de cada sintoma :.
         Glicemia_baixo = fuzz.trimf(vl_Glicemia, [50, 170, 250])
         Glicemia_normal = fuzz.trimf(vl_Glicemia, [250, 285, 320])
-        Glicemia_alto = fuzz.trimf(vl_Glicemia,[320, 340, 360])
-        Glicemia_baixo_alto = fuzz.trimf(vl_Glicemia, [0, 25, 50])
+        Glicemia_alto = fuzz.trapmf(vl_Glicemia,[320, 330, 350, 360])
+        Glicemia_baixo_alto = fuzz.trapmf(vl_Glicemia, [0, 20, 40, 50])
 
-        Sudorese_baixo = fuzz.trimf(vl_Sudorese, [0, 30, 45])
+        Sudorese_baixo = fuzz.trapmf(vl_Sudorese, [0, 10, 40, 45])
         Sudorese_normal = fuzz.trimf(vl_Sudorese, [35, 60, 85])
-        Sudorese_alto = fuzz.trimf(vl_Sudorese, [80, 90, 100])
+        Sudorese_alto = fuzz.trapmf(vl_Sudorese, [80, 85, 95, 100])
 
-        Desidratacao_baixo = fuzz.trimf(vl_Desidratacao, [0, 30, 45])
-        Desidratacao_normal = fuzz.trimf(vl_Desidratacao, [35, 60, 85])
-        Desidratacao_alto = fuzz.trimf(vl_Desidratacao, [80, 90, 100])
+        Desidratacao_baixo = fuzz.trapmf(vl_Desidratacao, [0, 20, 40, 45])
+        Desidratacao_normal = fuzz.trimf(vl_Desidratacao, [35, 60, 80])
+        Desidratacao_alto = fuzz.trapmf(vl_Desidratacao, [80, 85, 95, 100])
 
-        AlteracaoMental_baixo = fuzz.trimf(vl_AlteracaoMental, [0, 30, 45])
+        AlteracaoMental_baixo = fuzz.trapmf(vl_AlteracaoMental, [0, 20, 40, 45])
         AlteracaoMental_normal = fuzz.trimf(vl_AlteracaoMental, [35, 60, 85])
-        AlteracaoMental_alto = fuzz.trimf(vl_AlteracaoMental, [80, 90, 100])
+        AlteracaoMental_alto = fuzz.trapmf(vl_AlteracaoMental, [80, 85, 95, 100])
 
-        Febre_baixo = fuzz.trimf(vl_Febre, [0, 30, 45])
+        Febre_baixo = fuzz.trapmf(vl_Febre, [0, 20, 40, 45])
         Febre_normal = fuzz.trimf(vl_Febre, [35, 60, 85])
-        Febre_alto = fuzz.trimf(vl_Febre, [80, 90, 100])
+        Febre_alto = fuzz.trapmf(vl_Febre, [80, 85, 95, 100])
 
-        Pulso_baixo = fuzz.trimf(vl_Pulso, [0, 30, 45])
+        Pulso_baixo = fuzz.trapmf(vl_Pulso, [0, 20, 40, 45])
         Pulso_normal = fuzz.trimf(vl_Pulso, [35, 60, 85])
-        Pulso_alto = fuzz.trimf(vl_Pulso, [80, 90, 100])
+        Pulso_alto = fuzz.trapmf(vl_Pulso, [80, 85, 95, 100])
 
-        Vomito_baixo = fuzz.trimf(vl_Vomito, [0, 30, 45])
+        Vomito_baixo = fuzz.trapmf(vl_Vomito, [0, 20, 40, 45])
         Vomito_normal = fuzz.trimf(vl_Vomito, [35, 60, 85])
-        Vomito_alto = fuzz.trimf(vl_Vomito, [80, 90, 100])
+        Vomito_alto = fuzz.trapmf(vl_Vomito, [80, 85, 95, 100])
 
-        VisaoBorrada_baixo = fuzz.trimf(vl_VisaoBorrada, [0, 30, 45])
+        VisaoBorrada_baixo = fuzz.trapmf(vl_VisaoBorrada, [0, 20, 40, 45])
         VisaoBorrada_normal = fuzz.trimf(vl_VisaoBorrada, [35, 60, 85])
-        VisaoBorrada_alto = fuzz.trimf(vl_VisaoBorrada, [80, 90, 100])
+        VisaoBorrada_alto = fuzz.trapmf(vl_VisaoBorrada, [80, 85, 95, 100])
 
-        Dispneia_baixo = fuzz.trimf(vl_Dispneia, [0, 30, 45])
+        Dispneia_baixo = fuzz.trapmf(vl_Dispneia, [0, 20, 40, 45])
         Dispneia_normal = fuzz.trimf(vl_Dispneia, [35, 60, 85])
-        Dispneia_alto = fuzz.trimf(vl_Dispneia, [80, 90, 100])
+        Dispneia_alto = fuzz.trapmf(vl_Dispneia, [80, 85, 95, 100])
 
-        saida_azul = fuzz.trimf(x_saida, [0, 7, 15])
+        saida_azul = fuzz.trapmf(x_saida, [0, 3, 12, 15])
         saida_verde = fuzz.trimf(x_saida, [15, 22, 29])
         saida_amarelo = fuzz.trimf(x_saida, [29, 36, 43])
-        saida_vermelho = fuzz.trimf(x_saida, [43, 50, 60])
+        saida_vermelho = fuzz.trapmf(x_saida, [43, 45, 55, 60])
         #endregion
 
         #region .: Função de ativação para cada nivel definido anteriormente :.

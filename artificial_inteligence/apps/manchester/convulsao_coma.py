@@ -20,11 +20,11 @@ class ConsulsaoComa(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if DadosVitaisAlterados is None or DadosVitaisAlterados == '' or int(DadosVitaisAlterados) < 10: DadosVitaisAlterados = 10
-        if Glasgow is None or Glasgow == '' or int(Glasgow < 10): Glasgow = 10  
-        if IntoxicacaoExogena is None or IntoxicacaoExogena == '' or int(IntoxicacaoExogena) < 10: IntoxicacaoExogena = 10
-        if Convulsao is None or Convulsao == '' or int(Convulsao) < 10: Convulsao = 10  
-        if Epilepsia is None or Epilepsia == '' or int(Epilepsia) < 10: Epilepsia = 10  
+        if DadosVitaisAlterados is None or DadosVitaisAlterados == '': DadosVitaisAlterados = 10
+        if Glasgow is None or Glasgow == '': Glasgow = 10  
+        if IntoxicacaoExogena is None or IntoxicacaoExogena == '': IntoxicacaoExogena = 10
+        if Convulsao is None or Convulsao == '': Convulsao = 10  
+        if Epilepsia is None or Epilepsia == '': Epilepsia = 10  
         #endregion
 
         #region .: Definição do range de cada sintoma :.
@@ -37,30 +37,30 @@ class ConsulsaoComa(Resource):
         #endregion
 
         #region .: Definição do range da pertinencia de cada sintoma :.
-        DadosVitaisAlterados_baixo = fuzz.trimf(vl_DadosVitaisAlterados, [0, 30, 45])
+        DadosVitaisAlterados_baixo = fuzz.trapmf(vl_DadosVitaisAlterados, [0, 20, 30, 45])
         DadosVitaisAlterados_normal = fuzz.trimf(vl_DadosVitaisAlterados, [35, 60, 85])
-        DadosVitaisAlterados_alto = fuzz.trimf(vl_DadosVitaisAlterados, [80, 90, 100])
+        DadosVitaisAlterados_alto = fuzz.trapmf(vl_DadosVitaisAlterados, [80, 85, 95, 100])
 
-        Glasgow_alto = fuzz.trimf(vl_Glasgow, [3, 5, 9])
+        Glasgow_alto = fuzz.trapmf(vl_Glasgow, [3, 5, 8, 9])
         Glasgow_normal = fuzz.trimf(vl_Glasgow, [9, 11, 13])
-        Glasgow_baixo = fuzz.trimf(vl_Glasgow, [13, 14, 15])
+        Glasgow_baixo = fuzz.trapmf(vl_Glasgow, [12, 13, 14, 15])
 
-        IntoxicacaoExogena_baixo = fuzz.trimf(vl_IntoxicacaoExogena, [0, 30, 45])
+        IntoxicacaoExogena_baixo = fuzz.trapmf(vl_IntoxicacaoExogena, [0, 20, 30, 45])
         IntoxicacaoExogena_normal = fuzz.trimf(vl_IntoxicacaoExogena, [35, 60, 85])
-        IntoxicacaoExogena_alto = fuzz.trimf(vl_IntoxicacaoExogena, [80, 90, 100])
+        IntoxicacaoExogena_alto = fuzz.trapmf(vl_IntoxicacaoExogena, [80, 85, 95, 100])
 
-        Convulsao_baixo = fuzz.trimf(vl_Convulsao, [0, 30, 45])
+        Convulsao_baixo = fuzz.trapmf(vl_Convulsao, [0, 20, 30, 45])
         Convulsao_normal = fuzz.trimf(vl_Convulsao, [35, 60, 85])
-        Convulsao_alto = fuzz.trimf(vl_Convulsao, [80, 90, 100])
+        Convulsao_alto = fuzz.trapmf(vl_Convulsao, [80, 85, 95, 100])
 
-        Epilepsia_baixo = fuzz.trimf(vl_Epilepsia, [0, 30, 45])
+        Epilepsia_baixo = fuzz.trapmf(vl_Epilepsia, [0, 20, 30, 45])
         Epilepsia_normal = fuzz.trimf(vl_Epilepsia, [35, 60, 85])
-        Epilepsia_alto = fuzz.trimf(vl_Epilepsia, [80, 90, 100])
+        Epilepsia_alto = fuzz.trapmf(vl_Epilepsia, [80, 85, 95, 100])
 
-        saida_azul = fuzz.trimf(x_saida, [0, 7, 15])
+        saida_azul = fuzz.trapmf(x_saida, [0, 3, 12, 15])
         saida_verde = fuzz.trimf(x_saida, [15, 22, 29])
         saida_amarelo = fuzz.trimf(x_saida, [29, 36, 43])
-        saida_vermelho = fuzz.trimf(x_saida, [43, 50, 60])
+        saida_vermelho = fuzz.trapmf(x_saida, [43, 47, 57, 60])
         #endregion
 
         #region .: Função de ativação para cada nivel definido anteriormente :.

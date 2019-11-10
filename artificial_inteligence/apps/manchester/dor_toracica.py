@@ -34,27 +34,27 @@ class DorToracica(Resource):
         #endregion
 
         #region .: Definição do range da pertinencia de cada sintoma :.
-        DadosVitaisAlterados_baixo = fuzz.trimf(vl_DadosVitaisAlterados, [0, 30, 45])
+        DadosVitaisAlterados_baixo = fuzz.trapmf(vl_DadosVitaisAlterados, [0, 20, 40, 45])
         DadosVitaisAlterados_normal = fuzz.trimf(vl_DadosVitaisAlterados, [35, 60, 85])
-        DadosVitaisAlterados_alto = fuzz.trimf(vl_DadosVitaisAlterados, [80, 90, 100])
+        DadosVitaisAlterados_alto = fuzz.trapmf(vl_DadosVitaisAlterados, [80, 85, 95, 100])
 
-        Dor_baixo = fuzz.trimf(vl_Dor, [0, 25, 50])
+        Dor_baixo = fuzz.trapmf(vl_Dor, [0, 20, 45, 50])
         Dor_moderado = fuzz.trimf(vl_Dor, [40, 50, 70])
         Dor_normal = fuzz.trimf(vl_Dor, [65, 80, 90])
-        Dor_alto = fuzz.trimf(vl_Dor, [80, 95, 100])
+        Dor_alto = fuzz.trapmf(vl_Dor, [80, 85, 95, 100])
 
-        FrequenciaDor_baixo = fuzz.trimf(vl_FrequenciaDor, [0, 30, 45])
+        FrequenciaDor_baixo = fuzz.trapmf(vl_FrequenciaDor, [0, 20, 40, 45])
         FrequenciaDor_normal = fuzz.trimf(vl_FrequenciaDor, [35, 60, 85])
-        FrequenciaDor_alto = fuzz.trimf(vl_FrequenciaDor, [80, 90, 100])
+        FrequenciaDor_alto = fuzz.trapmf(vl_FrequenciaDor, [80, 85, 95, 100])
 
-        Idade_baixo = fuzz.trimf(vl_Idade, [0, 30, 40])
+        Idade_baixo = fuzz.trapmf(vl_Idade, [0, 20, 40, 40])
         Idade_normal = fuzz.trimf(vl_Idade, [40, 50, 55])
-        Idade_alto = fuzz.trimf(vl_Idade, [55, 85, 100])
+        Idade_alto = fuzz.trapmf(vl_Idade, [55, 60, 95, 100])
 
-        saida_azul = fuzz.trimf(x_saida, [0, 7, 15])
+        saida_azul = fuzz.trapmf(x_saida, [0, 3, 12, 15])
         saida_verde = fuzz.trimf(x_saida, [15, 22, 29])
         saida_amarelo = fuzz.trimf(x_saida, [29, 36, 43])
-        saida_vermelho = fuzz.trimf(x_saida, [43, 50, 60])
+        saida_vermelho = fuzz.trapmf(x_saida, [43, 45, 55, 60])
         #endregion
 
         #region .: Função de ativação para cada nivel definido anteriormente :.

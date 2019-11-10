@@ -19,10 +19,10 @@ class DoencaPsiquiatrica(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if DadosVitaisAlterados is None or DadosVitaisAlterados == '' or int(DadosVitaisAlterados) < 10: DadosVitaisAlterados = 10
-        if Agitacao is None or Agitacao == '' or int(Agitacao) < 10: Agitacao = 10
-        if Depressao is None or Depressao == '' or int(Depressao) < 10: Depressao = 10
-        if EstadoMental is None or EstadoMental == '' or int(EstadoMental) < 10: EstadoMental = 10
+        if DadosVitaisAlterados is None or DadosVitaisAlterados == '': DadosVitaisAlterados = 10
+        if Agitacao is None or Agitacao == '': Agitacao = 10
+        if Depressao is None or Depressao == '': Depressao = 10
+        if EstadoMental is None or EstadoMental == '': EstadoMental = 10
         #endregion
 
         #region .: Definição do range de cada sintoma :.
@@ -34,26 +34,26 @@ class DoencaPsiquiatrica(Resource):
         #endregion
 
         #region .: Definição do range da pertinencia de cada sintoma :.
-        DadosVitaisAlterados_baixo = fuzz.trimf(vl_DadosVitaisAlterados, [0, 30, 45])
+        DadosVitaisAlterados_baixo = fuzz.trapmf(vl_DadosVitaisAlterados, [0, 20, 40, 45])
         DadosVitaisAlterados_normal = fuzz.trimf(vl_DadosVitaisAlterados, [35, 60, 85])
-        DadosVitaisAlterados_alto = fuzz.trimf(vl_DadosVitaisAlterados, [80, 90, 100])
+        DadosVitaisAlterados_alto = fuzz.trapmf(vl_DadosVitaisAlterados, [80, 85, 95, 100])
 
-        Agitacao_baixo = fuzz.trimf(vl_Agitacao, [0, 30, 45])
+        Agitacao_baixo = fuzz.trapmf(vl_Agitacao, [0, 20, 40, 45])
         Agitacao_normal = fuzz.trimf(vl_Agitacao, [35, 60, 85])
-        Agitacao_alto = fuzz.trimf(vl_Agitacao, [80, 90, 100])
+        Agitacao_alto = fuzz.trapmf(vl_Agitacao, [80, 85, 95, 100])
         
-        Depressao_baixo = fuzz.trimf(vl_Depressao, [0, 30, 45])
+        Depressao_baixo = fuzz.trapmf(vl_Depressao, [0, 20, 40, 45])
         Depressao_normal = fuzz.trimf(vl_Depressao, [35, 60, 85])
-        Depressao_alto = fuzz.trimf(vl_Depressao, [80, 90, 100])
+        Depressao_alto = fuzz.trapmf(vl_Depressao, [80, 85, 95, 100])
         
-        EstadoMental_baixo = fuzz.trimf(vl_EstadoMental, [0, 30, 45])
+        EstadoMental_baixo = fuzz.trapmf(vl_EstadoMental, [0, 20, 40, 45])
         EstadoMental_normal = fuzz.trimf(vl_EstadoMental, [35, 60, 85])
-        EstadoMental_alto = fuzz.trimf(vl_EstadoMental, [80, 90, 100])
+        EstadoMental_alto = fuzz.trapmf(vl_EstadoMental, [80, 85, 95, 100])
 
-        saida_azul = fuzz.trimf(x_saida, [0, 7, 15])
+        saida_azul = fuzz.trapmf(x_saida, [0, 3, 12, 15])
         saida_verde = fuzz.trimf(x_saida, [15, 22, 29])
         saida_amarelo = fuzz.trimf(x_saida, [29, 36, 43])
-        saida_vermelho = fuzz.trimf(x_saida, [43, 50, 60])
+        saida_vermelho = fuzz.trapmf(x_saida, [43, 45, 55, 60])
         #endregion
 
         #region .: Função de ativação para cada nivel definido anteriormente :.

@@ -21,12 +21,12 @@ class Cefaleia(Resource):
         #endregion
 
         #region .: Verificação de valores da API :.
-        if DadosVitaisAlterados is None or DadosVitaisAlterados == '' or int(DadosVitaisAlterados) < 10: DadosVitaisAlterados = 10
-        if Dor is None or Dor == '' or int(Dor) < 10: Dor = 10
-        if Nuca is None or Nuca == '' or int(Nuca) < 10: Nuca = 10
-        if SinaisNeurologicos is None or SinaisNeurologicos == '' or int(SinaisNeurologicos) < 10: SinaisNeurologicos = 10
-        if PAD is None or PAD == '' or int(PAD) < 10: PAD = 10
-        if PAS is None or PAS == '' or int(PAS) < 10: PAS = 10    
+        if DadosVitaisAlterados is None or DadosVitaisAlterados == '': DadosVitaisAlterados = 10
+        if Dor is None or Dor == '': Dor = 10
+        if Nuca is None or Nuca == '': Nuca = 10
+        if SinaisNeurologicos is None or SinaisNeurologicos == '': SinaisNeurologicos = 10
+        if PAD is None or PAD == '': PAD = 10
+        if PAS is None or PAS == '': PAS = 10    
         #endregion
 
         #region .: Definição do range de cada sintoma :.
@@ -40,33 +40,34 @@ class Cefaleia(Resource):
         #endregion
 
         #region .: Definição do range da pertinencia de cada sintoma :.
-        DadosVitaisAlterados_baixo = fuzz.trimf(vl_DadosVitaisAlterados, [0, 30, 45])
-        DadosVitaisAlterados_normal = fuzz.trimf(vl_DadosVitaisAlterados, [35, 60, 85])
-        DadosVitaisAlterados_alto = fuzz.trimf(vl_DadosVitaisAlterados, [80, 90, 100])
+        DadosVitaisAlterados_baixo = fuzz.trapmf(vl_DadosVitaisAlterados, [0, 20, 30, 40])
+        DadosVitaisAlterados_normal = fuzz.trimf(vl_DadosVitaisAlterados, [30, 60, 80])
+        DadosVitaisAlterados_alto = fuzz.trapmf(vl_DadosVitaisAlterados, [80, 85, 90, 100])
 
-        Dor_baixo = fuzz.trimf(vl_Dor, [0, 50, 70])
+        Dor_baixo = fuzz.trapmf(vl_Dor, [0, 20, 50, 70])
         Dor_normal = fuzz.trimf(vl_Dor, [65, 80, 90])
-        Dor_alto = fuzz.trimf(vl_Dor, [75, 95, 100])
+        Dor_alto = fuzz.trapmf(vl_Dor, [75, 85, 95, 100])
 
-        Nuca_baixo = fuzz.trimf(vl_Nuca, [0, 30, 60])
+        Nuca_baixo = fuzz.trapmf(vl_Nuca, [0, 20, 30, 60])
         Nuca_normal = fuzz.trimf(vl_Nuca, [50, 60, 80])
-        Nuca_alto = fuzz.trimf(vl_Nuca, [80, 90, 100])
+        Nuca_alto = fuzz.trapmf(vl_Nuca, [80, 85, 90, 100])
 
-        SinaisNeurologicos_baixo = fuzz.trimf(vl_SinaisNeurologicos, [0, 50, 70])
+        SinaisNeurologicos_baixo = fuzz.trapmf(vl_SinaisNeurologicos, [0, 20, 50, 70])
         SinaisNeurologicos_normal = fuzz.trimf(vl_SinaisNeurologicos, [65, 80, 90])
-        SinaisNeurologicos_alto = fuzz.trimf(vl_SinaisNeurologicos, [75, 95, 100])
+        SinaisNeurologicos_alto = fuzz.trapmf(vl_SinaisNeurologicos, [75, 85, 95, 100])
 
-        #PAS_baixo = fuzz.trimf(vl_PAS, [0, 50, 70])
-        #PAS_normal = fuzz.trimf(vl_PAS, [65, 80, 90])
-        PAS_alto = fuzz.trimf(vl_PAS, [75, 95, 100])
+        PAS_baixo = fuzz.trapmf(vl_PAS, [0, 20, 50, 70])
+        PAS_normal = fuzz.trimf(vl_PAS, [65, 80, 90])
+        PAS_alto = fuzz.trapmf(vl_PAS, [75, 85, 95, 100])
 
-        #PAD_baixo = fuzz.trimf(vl_PAD, [0, 50, 70])
-        #PAD_normal = fuzz.trimf(vl_PAD, [65, 80, 90])
-        PAD_alto = fuzz.trimf(vl_PAD, [75, 95, 100])
+        PAD_baixo = fuzz.trapmf(vl_PAD, [0, 20, 50, 70])
+        PAD_normal = fuzz.trimf(vl_PAD, [65, 80, 90])
+        PAD_alto = fuzz.trapmf(vl_PAD, [75, 85, 95, 100])
 
-        saida_verde = fuzz.trimf(x_saida, [0, 10, 20])
+        saida_verde = fuzz.trapmf(x_saida, [0, 5, 10, 20])
         saida_amarelo = fuzz.trimf(x_saida, [20, 30, 40])
-        saida_vermelho = fuzz.trimf(x_saida, [40, 50, 60])
+        saida_vermelho = fuzz.trapmf(x_saida, [40, 45, 55, 60])
+        print("chegou aqui")
         #endregion
 
         #region .: Função de ativação para cada nivel definido anteriormente :.
